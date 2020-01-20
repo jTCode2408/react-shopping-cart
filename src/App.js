@@ -19,8 +19,8 @@ function App() {
 	};
 
 //REMOVE ITEM **STERTCH
-	const removeItem = item =>{
-
+	const removeItem = removed =>{
+		setCart(cart.filter(item => item.id !== removed));
 
 	}
 
