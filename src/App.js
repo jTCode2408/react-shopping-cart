@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import data from './data';
 //contexts
 import { ProductContext } from './contexts/ProductContext';
+import { CartContext } from './contexts/CartContext';
 // Components
 import Navigation from './components/Navigation';
 import Products from './components/Products';
@@ -14,9 +15,14 @@ function App() {
 
 	const addItem = item => {
 		// add the given item to the cart
-		console.log('item',item);
 		setCart([...cart, item]);
 	};
+
+//REMOVE ITEM **STERTCH
+	const removeItem = item =>{
+
+
+	}
 
 	return (
 		
@@ -24,7 +30,8 @@ function App() {
 {/*wrap all components/routes inside of productcontext.provider*/}
 		<ProductContext.Provider value = {{products, addItem}}>
 {/*pass value prop holding products state & addItem function*/}
-			<Navigation cart={cart} />
+		 <CartContext.Provider value = {{cart, removeItem}}>
+			<Navigation />
 			{/* Routes */}
 			<Route
 				exact
@@ -33,8 +40,9 @@ function App() {
 
 			<Route
 				path="/cart"
-				render={() => <ShoppingCart cart={cart} />}
+				component = {ShoppingCart}
 			/>
+			</CartContext.Provider>
 			</ProductContext.Provider>
 		</div>
 	);
