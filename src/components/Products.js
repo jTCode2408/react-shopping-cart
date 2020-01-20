@@ -1,16 +1,20 @@
-import React from 'react';
-
+import React, {useContext} from 'react';
+//context obj
+import { ProductContext } from '../contexts/ProductContext';
 // Components
 import Product from './Product';
 
-const Products = props => {
+const Products = () => {
+	//destructure values from productContext obj and pass into hook
+	const {products, addItem } = useContext(ProductContext);
+
 	return (
 		<div className="products-container">
-			{props.products.map(product => (
+			{products.map(product => (
 				<Product
 					key={product.id}
 					product={product}
-					addItem={props.addItem}
+					addItem={addItem}
 				/>
 			))}
 		</div>
